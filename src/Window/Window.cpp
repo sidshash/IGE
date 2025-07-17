@@ -1,0 +1,62 @@
+#include "Window.h"
+
+Window::Window(int w, int h, const char* title)
+{
+    AddObserver(this);
+    WIDTH = w;
+    HEIGHT = h;
+    TITLE = title;
+    status = Init();
+    Logger::Log(LogLevel::Info, "Window Created", "Application");
+}
+
+int Window::Init() {
+    /* Initialize the library */
+    if (!glfwInit())
+        return -1;
+
+    
+    /* Create a windowed mode window and its OpenGL context */
+    glfwInit();
+    glfwWindowHint(GLFW_MAXIMIZED, GLFW_TRUE);
+    glfwWindowHint(GLFW_CONTEXT_VERSION_MAJOR, 4);
+    glfwWindowHint(GLFW_CONTEXT_VERSION_MINOR, 6);
+    glfwWindowHint(GLFW_OPENGL_PROFILE, GLFW_OPENGL_CORE_PROFILE);
+    glfwWindowHint(GLFW_RESIZABLE, GLFW_TRUE);
+    GLFWmonitor* monitor = glfwGetPrimaryMonitor(); // Get the main monitor
+    const GLFWvidmode* mode = glfwGetVideoMode(monitor); // Get current video mode
+
+    window = glfwCreateWindow(mode->width, mode->height, TITLE, nullptr, nullptr);
+    if (!window)
+    {
+        glfwTerminate();
+        return -1;
+    }
+
+    /* Make the window's context current */
+    glfwMakeContextCurrent(window);
+
+    if (glewInit() != GLEW_OK)
+        return -1;
+    
+}
+
+
+void Window::HandleInput() {
+    if (glfwGetKey(window, GLFW_KEY_ESCAPE) == GLFW_PRESS)
+        onEvent(new Event({ Events::KEYPRESS, Events::INPUT, (void*)GLFW_KEY_ESCAPE }));
+}
+
+void Window::onNotify (Event *e) {
+    switch (e->name) {      //switch case for different window events
+    case Events::KEYPRESS:
+      
+        switch ((int)e->data) {     //switch case for individual key check
+        case GLFW_KEY_ESCAPE:
+            glfwSetWindowShouldClose(window, true);
+            break;
+        }
+
+        break;
+    }
+}
