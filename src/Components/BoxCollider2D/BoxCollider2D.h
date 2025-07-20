@@ -28,5 +28,8 @@ public:
 
 	void ResolveCollision(BoxCollider2D* bc, float deltaTime);
 
+	ComponentType GetType() override {
+		return ComponentType::BoxCollider2D;
+	}
 };
 

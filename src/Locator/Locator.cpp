@@ -3,11 +3,13 @@
 #include "../Renderer/Renderer.h"
 #include "../Application.h"
 #include "../Camera/Camera.h"
+#include "../Scene/Scene.h"
 
 Physics* Locator::mPhysics = nullptr;
 Renderer* Locator::mRenderer= nullptr;
 Application* Locator::mApplication = nullptr;
 Camera* Locator::mCamera = nullptr;
+Scene* Locator::mScene = nullptr;
 
 Physics* Locator::GetPhysics() {
 	return mPhysics;
@@ -36,4 +38,11 @@ Camera* Locator::GetCamera() {
 }
 void Locator::SetCamera(Camera* camera) {
 	mCamera = camera;
+}
+
+Scene* Locator::GetScene() {
+	return mScene;
+}
+void Locator::SetScene(Scene* scene) {
+	mScene = scene;
 }

@@ -5,11 +5,20 @@
 
 class GameObject;
 
+
+enum class ComponentType : uint32_t {
+	Transform,
+	Mesh,
+	Rigidbody,
+	BoxCollider2D
+};
+
 class Component: public IInspectable
 {
 protected:
 	GameObject* gameObject;
 public:
 	Component(GameObject* gO): gameObject(gO) {}
+	virtual ComponentType GetType() = 0;
 	virtual ~Component() = default;
 };

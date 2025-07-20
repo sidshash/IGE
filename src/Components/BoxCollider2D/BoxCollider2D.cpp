@@ -33,7 +33,7 @@ bool BoxCollider2D::CheckCollision(BoxCollider2D* b, float deltaTime) {
     Transform* t = gameObject->GetComponent<Transform>();
     Transform* t_ = b->gameObject->GetComponent<Transform>();
 
-    if (t == nullptr || t_ == nullptr || isStationary) return false;
+    if (t == nullptr || t_ == nullptr) return false;
 
     Vector p = t->position;
     Vector p_ = t_->position;
@@ -106,10 +106,11 @@ void BoxCollider2D::ResolveCollision(BoxCollider2D* bc, float deltaTime) {
 		//float restitution = std::min(rb->GetRestitution(), rb_->GetRestitution());
 
 		Vector thisFinalVel = (rb->GetVelocity() * (rb->GetRestitution() * -1.0f));
-		Vector otherFinalVel = (rb_->GetVelocity() * (rb_->GetRestitution() * -1.0f));
-
 		rb->SetVelocity(thisFinalVel);
-		rb_->SetVelocity(otherFinalVel);
+        if (!bc->isStationary) {
+            Vector otherFinalVel = (rb_->GetVelocity() * (rb_->GetRestitution() * -1.0f));
+            rb_->SetVelocity(otherFinalVel);
+        }
 
 	}
 

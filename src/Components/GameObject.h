@@ -11,6 +11,8 @@
 #include "BoxCollider2D/BoxCollider2D.h"
 class GameObject: public IInspectable
 {
+	friend class Writer;
+	friend class Reader;
 	std::vector<Component*> components;
 
 public:
@@ -45,4 +47,5 @@ void GameObject::AddComponent() {
 		components.push_back(new T(this));
 	}
 }
+
 

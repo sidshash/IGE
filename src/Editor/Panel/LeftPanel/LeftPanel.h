@@ -4,6 +4,8 @@ class Panel;
 #include "../IPanel.h"
 #include "../../../Components/GameObject.h"
 #include "../.././../Locator/Locator.h"
+#include "../../../Util/Writer.h"
+#include "../../../Util/Reader.h"
 
 class LeftPanel: public IPanel
 {

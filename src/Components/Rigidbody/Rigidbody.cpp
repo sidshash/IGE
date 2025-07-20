@@ -25,7 +25,6 @@ void Rigidbody::Update(float deltaTime) {
 
 	if (t == nullptr) return;
 
-	acceleration.y = 0;
 
 	if (gravity) {
 		acceleration.y = -9.81f;

@@ -139,6 +139,7 @@
     </Link>
   </ItemDefinitionGroup>
   <ItemGroup>
+    <ClCompile Include="src\Scene\Scene.cpp" />
     <ClCompile Include="src\Camera\Camera.cpp" />
     <ClCompile Include="src\Components\BoxCollider2D\BoxCollider2D.cpp" />
     <ClCompile Include="src\Components\Rigidbody\Rigidbody.cpp" />
@@ -172,6 +173,7 @@
     <ClCompile Include="src\Editor\Panel\ViewportPanel\ViewportPanel.cpp" />
   </ItemGroup>
   <ItemGroup>
+    <ClInclude Include="src\Scene\Scene.h" />
     <ClInclude Include="src\Camera\Camera.h" />
     <ClInclude Include="src\Components\BoxCollider2D\BoxCollider2D.h" />
     <ClInclude Include="src\Components\Rigidbody\Rigidbody.h" />
@@ -214,7 +216,8 @@
     <ClInclude Include="src\EventSystem\Observer\Observer.h" />
     <ClInclude Include="src\Application.h" />
     <ClInclude Include="src\Renderer\Vertex.h" />
-    <ClInclude Include="src\Util\MeshWriter.h" />
+    <ClInclude Include="src\Util\Reader.h" />
+    <ClInclude Include="src\Util\Writer.h" />
     <ClInclude Include="src\Util\Random.hpp" />
     <ClInclude Include="src\Window\Window.h" />
     <ClInclude Include="src\EventSystem\Subject\Subject.h" />

@@ -13,5 +13,8 @@ public:
 	{}
 	Vector position, scale, rotation;
 	void DrawInspectable() override;
+	ComponentType GetType() override {
+		return ComponentType::Transform;
+	}
 };
 

@@ -1,6 +1,7 @@
 #include "LeftPanel.h"
 #include "../Panel.h"
 #include "../../../Application.h"
+#include "../../../Scene/Scene.h"
 
 LeftPanel::LeftPanel(Panel* panel) :
     IPanel("Hierarchy"),
@@ -39,6 +40,22 @@ void LeftPanel::OnDraw(){
                 onEvent(new Event({Events::CREATE_GAME_OBJECT, Events::EDITOR}));
             }
             ImGui::EndMenu();
+        }
+        if (ImGui::Button("Save")) {
+            const char* filterPatterns[1] = { "*.cn" };
+            const char* filePath = tinyfd_saveFileDialog("Save As", "", 1, filterPatterns, NULL);
+
+            if (filePath) {
+                Locator::GetScene()->SaveScene(filePath);
+            }
+        }
+        if (ImGui::Button("Load")) {
+            const char* filterPatterns[1] = { "*.cn" };
+            const char* filePath = tinyfd_openFileDialog("Choose a scene file", "", 1, filterPatterns, NULL, 0);
+
+            if (filePath) {
+                Locator::GetScene()->LoadScene(filePath);
+            }
         }
         ImGui::EndMenuBar();
     }

@@ -16,6 +16,8 @@ class Camera;
 
 class Mesh: public Component
 {
+	friend class Writer;
+	friend class Reader;
 	std::vector<Vertex> vertices;
 	std::vector<GLuint> indices;
 	Vector color;
@@ -39,5 +41,8 @@ public:
 	void DrawInspectable() override;
 	void SetDrawMode(GLenum mode);
 	Shader* GetShader() const { return shader; }
+	ComponentType GetType() override {
+		return ComponentType::Mesh;
+	}
 };
 

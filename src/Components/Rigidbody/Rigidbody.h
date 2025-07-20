@@ -10,6 +10,8 @@ class Application;
 
 class Rigidbody : public Component
 {
+	friend class Writer;
+	friend class Reader;
 	bool gravity;
 
 	Vector velocity, acceleration;
@@ -23,5 +25,8 @@ public:
 	float GetRestitution() const { return restitution; }
 	void SetVelocity(Vector vel) { velocity = vel; }
 	Vector GetVelocity() const { return velocity; }
+	ComponentType GetType() override {
+		return ComponentType::Rigidbody;
+	}
 };
 

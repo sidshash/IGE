@@ -4,6 +4,7 @@ class Physics;
 class Renderer;
 class Application;
 class Camera;
+class Scene;
 
 class Locator
 {
@@ -11,6 +12,7 @@ class Locator
 	static Renderer* mRenderer;
 	static Application* mApplication;
 	static Camera* mCamera;
+	static Scene* mScene;
 public:
 	static Physics* GetPhysics();
 	static void SetPhysics(Physics* physics);
@@ -23,6 +25,9 @@ public:
 
 	static Camera* GetCamera();
 	static void SetCamera(Camera* camera);
+
+	static Scene* GetScene();
+	static void SetScene(Scene* scene);
 };
 
 
