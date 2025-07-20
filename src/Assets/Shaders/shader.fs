@@ -1,6 +1,6 @@
-#version 460 core
+#version 330 core
 
-in vec4 outColor;
+uniform vec4 outColor;
 out vec4 color;
 
 void main (){

@@ -3,8 +3,6 @@
 void RightPanel::OnDraw() {
     if(mSelectedItem)
         mSelectedItem->DrawInspectable();
-
-
 }
 
 void RightPanel::PreWindow() {

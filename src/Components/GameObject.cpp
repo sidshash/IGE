@@ -3,10 +3,7 @@
 void GameObject::DrawInspectable() {
 	//gameobject
 	if (ImGui::CollapsingHeader("Gameobject", ImGuiTreeNodeFlags_DefaultOpen)) {
-		ImGui::Text("Id: %d", id);
-		ImGui::Text("Name");
-		//ImGui::SameLine();
-		ImGui::InputText("##Name", &name);
+		ImGui::InputText(std::format("Name##{}", id).c_str(), &name);
 	}
 	//components
 	if(components.size())
@@ -27,6 +24,12 @@ void GameObject::DrawInspectable() {
 		}
 		if (ImGui::MenuItem("Mesh")) {
 			AddComponent<Mesh>();
+		}
+		if (ImGui::MenuItem("Rigidbody")) {
+			AddComponent<Rigidbody>();
+		}
+		if (ImGui::MenuItem("BoxCollider2D")) {
+			AddComponent<BoxCollider2D>();
 		}
 		ImGui::EndPopup();
 	}

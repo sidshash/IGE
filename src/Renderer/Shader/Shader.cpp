@@ -65,3 +65,7 @@ void Shader::UniformMat4(std::string location, glm::mat4 mat) {
 	GLint mLocation = glGetUniformLocation(programId, location.c_str());
 	glUniformMatrix4fv(mLocation, 1, GL_FALSE, glm::value_ptr(mat));
 }
+void Shader::Uniform3f(std::string location, Vector val) {
+	GLint mLocation = glGetUniformLocation(programId, location.c_str());
+	glUniform4f(mLocation, val.x, val.y, val.z, 1.0f);
+}

@@ -14,9 +14,10 @@ void Application::Run() {
 
 
     //frame rate
-    double  gLastTime = glfwGetTime();
+    float  gLastTime = (float)glfwGetTime();
     int     gFrameCount = 0;
     double  gFPS = 0.0;
+
     
     renderer->Init();
 
@@ -24,27 +25,36 @@ void Application::Run() {
 
     OnStart();
 
+    float lastTimeFpsSet = (float)glfwGetTime();
+
     while (!glfwWindowShouldClose(window))
     {
 
         ++gFrameCount;
-        double now = glfwGetTime();
+        float now = (float)glfwGetTime();
         if (now - gLastTime >= 1.0) {  // If more than 1 second passed
             gFPS = gFrameCount / (now - gLastTime);
             gFrameCount = 0;
-            gLastTime = now;
         }
+
+        physics->SetDeltaTime(now - gLastTime);
 
         glfwPollEvents();
         windowHandler->HandleInput();
 
-        renderer->SetFPS(gFPS);
+	    physics->Update(gameObjects);
+
+        if ((now - lastTimeFpsSet) > 1.0) {
+            renderer->SetFPS((int)(1.0f / (now - gLastTime)));
+            lastTimeFpsSet = now;
+        }
 
         renderer->DrawEditor(editor);
 
         renderer->Draw(gameObjects);
 
         glfwSwapBuffers(window);
+        gLastTime = now;
     }
 
     OnEnd();
@@ -55,6 +65,7 @@ void Application::Run() {
 
 GameObject* Application::CreateGameObject(const char* n) {
     GameObject* obj = new GameObject(n);
+    obj->AddComponent<Transform>();
     gameObjects.push_back(obj);
     return obj;
 }

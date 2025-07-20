@@ -19,9 +19,9 @@ int Window::Init() {
     /* Create a windowed mode window and its OpenGL context */
     glfwInit();
     glfwWindowHint(GLFW_MAXIMIZED, GLFW_TRUE);
-    glfwWindowHint(GLFW_CONTEXT_VERSION_MAJOR, 4);
-    glfwWindowHint(GLFW_CONTEXT_VERSION_MINOR, 6);
-    glfwWindowHint(GLFW_OPENGL_PROFILE, GLFW_OPENGL_CORE_PROFILE);
+    glfwWindowHint(GLFW_CONTEXT_VERSION_MAJOR, 3);
+    glfwWindowHint(GLFW_CONTEXT_VERSION_MINOR, 3);
+    glfwWindowHint(GLFW_OPENGL_PROFILE, GLFW_OPENGL_COMPAT_PROFILE);
     glfwWindowHint(GLFW_RESIZABLE, GLFW_TRUE);
     GLFWmonitor* monitor = glfwGetPrimaryMonitor(); // Get the main monitor
     const GLFWvidmode* mode = glfwGetVideoMode(monitor); // Get current video mode

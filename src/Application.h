@@ -1,15 +1,16 @@
 #pragma once
 #include <vector>
 #include "Window/Window.h"
-#include "Renderer/Renderer.h"
 #include "Physics/Physics.h"
+#include "Renderer/Renderer.h"
 #include "Editor/Editor.h"
-
+#include "Camera/Camera.h"
 
 class Application {
 	Window* windowHandler;
 
 	Renderer* renderer;
+	Camera camera;
 	Physics* physics;
 	Editor* editor;
 	std::vector<GameObject*> gameObjects;

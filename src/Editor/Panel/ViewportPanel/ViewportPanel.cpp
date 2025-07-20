@@ -18,6 +18,8 @@ void ViewportPanel::Init() {
         fbWidth = newWidth;
         fbHeight = newHeight;
 
+        Locator::GetCamera()->SetOrthoFromFramebuffer(fbWidth, fbHeight);
+
 
         if (depthRbo) glDeleteRenderbuffers(1, &depthRbo);
         if (colorTexture) glDeleteTextures(1, &colorTexture);

@@ -1,13 +1,13 @@
 #pragma once
 #include "../Component.h"
-#include "../../Physics/Physics.h"
+#include "../../Physics/Vector/Vector.h"
 #include "../GameObject.h"
 class Transform : public Component
 {
 public:
 	Transform(GameObject* gO): 
 		Component(gO),
-		position(1),
+		position(0),
 		scale(1),
 		rotation(0)
 	{}

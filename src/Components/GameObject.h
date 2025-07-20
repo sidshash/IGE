@@ -7,6 +7,8 @@
 #include "../Util/Random.hpp"
 #include "Transform/Transform.h"
 #include "Mesh/Mesh.h"
+#include "Rigidbody/Rigidbody.h"
+#include "BoxCollider2D/BoxCollider2D.h"
 class GameObject: public IInspectable
 {
 	std::vector<Component*> components;
@@ -17,7 +19,7 @@ public:
 	template <class T>
 	T* GetComponent();
 	template <class T>
-	T& AddComponent();
+	void AddComponent();
 	~GameObject() { for (Component *c : components) delete c; }
 	GameObject(std::string n) : name(n), id(Random::GenerateRandomID()) {}
 	void DrawInspectable() override;
@@ -37,11 +39,10 @@ T* GameObject::GetComponent() {
 
 template <class T>
 
-T& GameObject::AddComponent() {
+void GameObject::AddComponent() {
 	if (GetComponent<T>() == nullptr) {
 		T* comp = new T(this);
 		components.push_back(new T(this));
-		return *comp;
 	}
 }
 

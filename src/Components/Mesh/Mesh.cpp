@@ -1,5 +1,5 @@
 #include "Mesh.h"
-
+#include "../../Camera/Camera.h"
 
 void Mesh::LoadMesh(const char* location) {
 	
@@ -30,25 +30,26 @@ void Mesh::Draw() {
 	ImGuiIO& io = ImGui::GetIO();
 
 	Transform* t = gameObject->GetComponent<Transform>();
+	
+	if(t == nullptr){
+		return;
+	}
 
-	float aspect = 16.0f / 9.0f;
-	float viewHeight = 100.0f;
-	float viewWidth = viewHeight * aspect;
-
-	glm::mat4 projection = glm::ortho(
-		0.0f, 16.0f,       // left, right
-		0.0f, 9.0f,      // bottom, top
-		-1.0f, 1.0f
-	);
-
+	glm::mat4 projection = Locator::GetCamera()->GetProjection();
+	//glm::mat4 model(1);
 	glm::mat4 model = glm::translate(glm::mat4(1.0f), glm::vec3(t->position.x, t->position.y, t->position.z));
 	model = glm::scale(model, glm::vec3(t->scale.x, t->scale.y, t->scale.z));
 
 	glm::mat4 mvp = projection * model;
 
 	shader->UniformMat4("u_MVP", mvp);
+	shader->Uniform3f("outColor", color);
 
 	glBindVertexArray(vao);
+
+	if (drawMode == GL_FRONT_AND_BACK)
+		glPolygonMode(GL_FRONT_AND_BACK, GL_LINE);
+
 	glDrawElements(GL_TRIANGLES, indices.size(), GL_UNSIGNED_INT, 0);
 }
 
@@ -98,11 +99,17 @@ void Mesh::Upload() {
 
 void Mesh::DrawInspectable() {
 	if (ImGui::CollapsingHeader("Mesh", ImGuiTreeNodeFlags_DefaultOpen)) {
-		ImGui::Text("Color");
+		if (ImGui::BeginCombo("Drawing Mode", "Triangles")) {
+			if (ImGui::Selectable("Triangle"))
+				SetDrawMode(GL_TRIANGLES);
+			if(ImGui::Selectable("Wireframe"))
+				SetDrawMode(GL_FRONT_AND_BACK);
+			ImGui::EndCombo();
+		}
+		ImGui::DragFloat3("Color", &color.x, 0.1f);
 		//ImGui::SameLine();
-		ImGui::InputFloat3("##Color", &color.x);
 		ImGui::Text("Mesh File");
-		ImGui::Text(meshFilePath.c_str());
+		ImGui::TextWrapped(meshFilePath.c_str());
 		if (ImGui::Button("Choose Mesh File")) {
 			const char* filterPatterns[1] = { "*.mesh" };
 			const char* filePath = tinyfd_openFileDialog("Choose a mesh file", "", 1, filterPatterns, NULL, 0);
@@ -111,5 +118,55 @@ void Mesh::DrawInspectable() {
 				LoadMesh(filePath);
 			}
 		}
+		if (!meshFilePath.empty()) {
+		if (ImGui::Button("Edit Mesh")) {
+			ImGui::OpenPopup("EditMeshPopup");
+		}
+		}
+		if (ImGui::BeginPopup("EditMeshPopup")) {
+				ImGui::Text("Edit Mesh Data");
+				ImGui::Separator();
+
+				for (int i = 0; i < vertices.size(); i++) {
+					Vertex& v = vertices[i];
+					ImGui::DragFloat3(std::format("Position {}", i).c_str(), &(v.position.x));
+					ImGui::DragFloat3(std::format("Tex Coord {}", i).c_str(), &(v.texCoord.x));
+					ImGui::DragFloat3(std::format("Color {}", i).c_str(), &(v.color.x)); // If applicable
+				}
+				for (int i = 0; i < indices.size(); i++) {
+					GLuint& n = indices[i];
+					ImGui::DragScalar(std::format("Position {}", i).c_str(), ImGuiDataType_U32, &(n));
+				}
+				if (ImGui::Button("Edit")) {
+					WriteMesh();
+				}
+				if (ImGui::Button("Close")) {
+					ImGui::CloseCurrentPopup();
+				}
+			ImGui::EndPopup();
+		}
 	}
+}
+
+void Mesh::SetDrawMode(GLenum mode) {
+	drawMode = mode;
+}
+
+void Mesh::WriteMesh() {
+
+	std::ofstream out(meshFilePath, std::ios::binary);
+
+	//write vertices size
+	uint32_t vertSize = vertices.size();
+	out.write(reinterpret_cast<char*>(&vertSize), sizeof(uint32_t));
+
+	//write vertices data
+	out.write(reinterpret_cast<char*>(vertices.data()), sizeof(Vertex) * vertSize);
+
+	//write indices size
+	uint32_t indSize = indices.size();;
+	out.write(reinterpret_cast<char*>(&indSize), sizeof(indSize));
+
+	//write indices data
+	out.write(reinterpret_cast<char*>(indices.data()), sizeof(uint32_t) * indSize);
 }

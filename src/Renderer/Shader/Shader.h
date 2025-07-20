@@ -5,6 +5,7 @@
 #include <iostream>
 #include <glm/glm.hpp>
 #include <glm/gtc/type_ptr.hpp>
+#include "../../Physics/Vector/Vector.h"
 #include "../../Logger/Logger.h"
 class Shader
 {
@@ -15,5 +16,6 @@ public:
 	Shader(const char* vertexShaderLocation, const char* fragmentShaderLocation);
 	void Use() const;
 	void UniformMat4(std::string location, glm::mat4 mat);
+	void Uniform3f(std::string location, Vector val);
 };
 
