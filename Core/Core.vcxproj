@@ -131,6 +131,8 @@
     </Link>
   </ItemDefinitionGroup>
   <ItemGroup>
+    <ClInclude Include="src\Event\Event.h" />
+    <ClInclude Include="src\Event\Events.h" />
     <ClInclude Include="src\Interfaces\Components\IScript.h" />
     <ClInclude Include="src\ScriptBehaviour\ScriptBehaviour.h" />
     <ClInclude Include="src\Core.h" />
@@ -147,6 +149,7 @@
     <ClInclude Include="src\Renderer\Vertex\Vertex.h" />
   </ItemGroup>
   <ItemGroup>
+    <ClCompile Include="src\Event\Event.cpp" />
     <ClCompile Include="src\Interfaces\Components\IScript.cpp" />
     <ClCompile Include="src\ScriptBehaviour\ScriptBehaviour.cpp" />
     <ClCompile Include="src\Core.cpp" />

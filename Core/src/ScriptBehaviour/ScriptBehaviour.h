@@ -21,5 +21,7 @@ public:
     T* GetComponent() {
         return gameObject->GetComponent<T>();
     }
+
+
 };
 

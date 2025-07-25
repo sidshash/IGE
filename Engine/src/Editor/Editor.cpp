@@ -45,7 +45,7 @@ void Editor::OnClose() {
 
 void Editor::onNotify(Event* e) {
     switch (e->name) {
-    case Events::CREATE_GAME_OBJECT:
+    case EventName::CREATE_GAME_OBJECT:
         Locator::GetApplication()->CreateGameObject();
         break;
     }

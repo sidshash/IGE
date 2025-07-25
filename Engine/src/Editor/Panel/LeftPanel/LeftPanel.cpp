@@ -37,7 +37,7 @@ void LeftPanel::OnDraw(){
     if (ImGui::BeginMenuBar()) {
         if (ImGui::BeginMenu("Create")) {
             if (ImGui::MenuItem("GameObject")) { 
-                onEvent(new Event({Events::CREATE_GAME_OBJECT, Events::EDITOR}));
+                onEvent(new Event({EventName::CREATE_GAME_OBJECT, EventType::EDITOR}));
             }
             ImGui::EndMenu();
         }

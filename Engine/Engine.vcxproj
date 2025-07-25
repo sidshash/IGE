@@ -356,8 +356,6 @@
     <ClInclude Include="src\Editor\Panel\Panel.h" />
     <ClInclude Include="src\Editor\Panel\RightPanel\RightPanel.h" />
     <ClInclude Include="src\Editor\Panel\ViewportPanel\ViewportPanel.h" />
-    <ClInclude Include="src\EventSystem\Events\Event.h" />
-    <ClInclude Include="src\EventSystem\Events\Events.hpp" />
     <ClInclude Include="src\EventSystem\Observer\Observer.h" />
     <ClInclude Include="src\EventSystem\Subject\Subject.h" />
     <ClInclude Include="src\Locator\Locator.h" />

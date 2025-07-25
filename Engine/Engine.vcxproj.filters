@@ -161,12 +161,6 @@
     <ClInclude Include="src\Editor\Editor.h">
       <Filter>Header Files</Filter>
     </ClInclude>
-    <ClInclude Include="src\EventSystem\Events\Event.h">
-      <Filter>Header Files</Filter>
-    </ClInclude>
-    <ClInclude Include="src\EventSystem\Events\Events.hpp">
-      <Filter>Header Files</Filter>
-    </ClInclude>
     <ClInclude Include="src\EventSystem\Observer\Observer.h">
       <Filter>Header Files</Filter>
     </ClInclude>

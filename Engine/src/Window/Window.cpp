@@ -42,12 +42,12 @@ int Window::Init() {
 
 void Window::HandleInput() {
     if (glfwGetKey(window, GLFW_KEY_ESCAPE) == GLFW_PRESS)
-        onEvent(new Event({ Events::KEYPRESS, Events::INPUT, (void*)GLFW_KEY_ESCAPE }));
+        onEvent(new Event({ EventName::KEYPRESS, EventType::INPUT, (void*)GLFW_KEY_ESCAPE }));
 }
 
 void Window::onNotify (Event *e) {
     switch (e->name) {      //switch case for different window events
-    case Events::KEYPRESS:
+    case EventName::KEYPRESS:
       
         switch ((int)e->data) {     //switch case for individual key check
         case GLFW_KEY_ESCAPE:
