@@ -42,15 +42,24 @@ int Window::Init() {
 
 void Window::HandleInput() {
     if (glfwGetKey(window, GLFW_KEY_ESCAPE) == GLFW_PRESS)
-        onEvent(new Event({ EventName::KEYPRESS, EventType::INPUT, (void*)GLFW_KEY_ESCAPE }));
+        onEvent(new Event({ EventName::KEYPRESS, EventType::INPUT, (void*)&KEY_ESC }));
+    if (glfwGetKey(window, GLFW_KEY_W) == GLFW_PRESS)
+        onEvent(new Event({ EventName::KEYPRESS, EventType::INPUT, (void*)&KEY_W }));
+    if (glfwGetKey(window, GLFW_KEY_A) == GLFW_PRESS)
+        onEvent(new Event({ EventName::KEYPRESS, EventType::INPUT, (void*)&KEY_A }));
+    if (glfwGetKey(window, GLFW_KEY_S) == GLFW_PRESS)
+        onEvent(new Event({ EventName::KEYPRESS, EventType::INPUT, (void*)&KEY_S }));
+    if (glfwGetKey(window, GLFW_KEY_D) == GLFW_PRESS)
+        onEvent(new Event({ EventName::KEYPRESS, EventType::INPUT, (void*)&KEY_D }));
+
 }
 
 void Window::onNotify (Event *e) {
     switch (e->name) {      //switch case for different window events
     case EventName::KEYPRESS:
-      
-        switch ((int)e->data) {     //switch case for individual key check
-        case GLFW_KEY_ESCAPE:
+        KEY key = *static_cast<KEY*>(e->data);
+        switch (key) {     //switch case for individual key check
+        case KEY::ESC:
             glfwSetWindowShouldClose(window, true);
             break;
         }

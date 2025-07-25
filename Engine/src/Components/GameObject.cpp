@@ -50,3 +50,4 @@ IBoxCollider2D* GameObject::GetBoxCollider2D()
 {
     return GetComponent<BoxCollider2D>();
 }
+

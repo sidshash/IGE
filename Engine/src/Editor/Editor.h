@@ -1,11 +1,11 @@
 #pragma once
 #include <GL/glew.h>
 #include <GLFW/glfw3.h>
-#include "../EventSystem/Observer/Observer.h"
+#include "../EventSystem/Subject/Subject.h"
 #include "Panel/Panel.h"
 #include "../Locator/Locator.h"
 class Window;
-class Editor: public Observer
+class Editor : public Observer, public Subject
 {
 	Window* windowHandler;
 	Panel* panel;
@@ -15,5 +15,6 @@ public:
 	void Init();
 	void Draw(float fps);
 	void OnClose();
+	using Subject::AddObserver;
 };
 

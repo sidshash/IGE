@@ -147,7 +147,6 @@ public:
 				ScriptBehaviour* behaviour = ScriptAPI::CreateBehaviour(hModule);
 				behaviour->SetGameObject(&gameobject);
 				script->SetBehaviour(behaviour);
-
 				gameobject.components.push_back(script);
 				break;
 			}

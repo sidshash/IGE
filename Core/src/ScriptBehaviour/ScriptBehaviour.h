@@ -1,5 +1,6 @@
 #pragma once
 #include "../Interfaces/IGameObject.h"
+#include "../Event/Event.h"
 #include "../ENGINE_API.h"
 
 class ENGINE_API ScriptBehaviour
@@ -16,6 +17,8 @@ public:
     virtual void OnUpdate() = 0;
 
     virtual void OnFixedUpdate() = 0;
+
+    virtual void OnEvent(Event* e) = 0;
 
     template<class T>
     T* GetComponent() {

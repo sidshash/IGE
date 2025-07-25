@@ -45,6 +45,8 @@ public:
 	IMesh* GetMesh() override;
 	IRigidbody* GetRigidbody() override;
 	IBoxCollider2D* GetBoxCollider2D() override;
+
+	//EVENT
 };
 
 template <class T>
@@ -64,7 +66,7 @@ template <class T>
 void GameObject::AddComponent() {
 	if (GetComponent<T>() == nullptr) {
 		T* comp = new T(this);
-		components.push_back(new T(this));
+		components.push_back(comp);
 	}
 }
 

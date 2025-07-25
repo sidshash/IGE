@@ -6,7 +6,7 @@
 #include "Editor/Editor.h"
 #include "Camera/Camera.h"
 
-class Application {
+class Application: public Observer {
 	Window* windowHandler;
 
 	Renderer* renderer;
@@ -17,6 +17,7 @@ class Application {
 	void OnStart();
 	void OnUpdate();
 	void OnEnd();
+	void onNotify(Event* e) override;
 public:
 	Application();
 	GameObject* CreateGameObject(const char* n = "GameObject");

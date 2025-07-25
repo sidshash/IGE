@@ -15,5 +15,6 @@ public:
 	GLFWwindow* window;
 	void HandleInput();
 	Window(int w, int h, const char* title);
+	using Subject::AddObserver;
 };
 

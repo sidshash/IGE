@@ -49,5 +49,6 @@ void Editor::onNotify(Event* e) {
         Locator::GetApplication()->CreateGameObject();
         break;
     }
+    onEvent(new Event(*e));
 }
 

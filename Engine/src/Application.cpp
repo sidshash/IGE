@@ -19,6 +19,16 @@ void Application::OnEnd() {
 
 }
 
+void Application::onNotify(Event* e)
+{
+    for (GameObject* g : gameObjects) {
+        Script* script = g->GetComponent<Script>();
+        if (script != nullptr) {
+            script->GetScriptBehaviour()->OnEvent(e);
+        }
+    }
+}
+
 Application::Application()
 {
     Locator::SetApplication(this);
@@ -27,6 +37,9 @@ Application::Application()
     renderer = new Renderer(windowHandler->window);
     physics = new Physics();
 
+    //SET OBSERVER
+    windowHandler->AddObserver(this);
+    editor->AddObserver(this);
 }
 
 void Application::Run() {

@@ -20,7 +20,7 @@ public:
             "/Fo:" + path + name + ".obj " +
             "/Fe:" + path + name + ".dll " +
             path + name + ".cpp" + " /I..\\Core\\src /link /LIBPATH:..\\x64\\Debug Core.lib\"";
-        int result = std::system((command + " >nul 2>&1").c_str());
+        int result = std::system((command /*+" >nul 2>&1"*/).c_str());
         std::filesystem::remove(path + name + ".obj");
         std::filesystem::remove(path + name + ".lib");
         std::filesystem::remove(path + name + ".exp");
