@@ -21,7 +21,7 @@ void Renderer::Draw(std::vector<GameObject*>& gameObjects) {
 
 void Renderer::Init() {
 	//V-SYNC 1 = ON, 0 = OFF
-	glfwSwapInterval(0);
+	glfwSwapInterval(1);
 	glEnable(GL_DEPTH_TEST);
 }
 

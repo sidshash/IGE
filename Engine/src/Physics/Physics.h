@@ -10,6 +10,6 @@ public:
 		Locator::SetPhysics(this);
 		Logger::Log(LogLevel::Info, "Physics Engine Created", "Application");
 	}
-	void Update(std::vector<GameObject*> gameObjects);
+	void Update(std::vector<GameObject*> &gameObjects);
 };
 

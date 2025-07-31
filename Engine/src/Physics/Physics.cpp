@@ -1,6 +1,6 @@
 #include "Physics.h"
 
-void Physics::Update(std::vector<GameObject*> gameObjects) {
+void Physics::Update(std::vector<GameObject*>& gameObjects) {
 	for(GameObject* g : gameObjects) {
 		Rigidbody* rb = g->GetComponent<Rigidbody>();
 		BoxCollider2D* bc = g->GetComponent<BoxCollider2D>();

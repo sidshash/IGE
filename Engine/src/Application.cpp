@@ -51,13 +51,34 @@ void Application::Run() {
 
     OnStart();
 
-    Time::mLastTime = glfwGetTime();
-    Time::mLastSecond = glfwGetTime();
+    Time::mLastTime = (float)glfwGetTime();
+    Time::mLastSecond = (float)glfwGetTime();
+
+    //MULTITHREADING STUFF
+    running = true;
+    updateThread = std::thread([this]() {
+        while (running) {
+            float now = (float)glfwGetTime();
+            float deltaTime = now - Time::mLastTime;
+            Time::mLastTime = now;
+            Time::mDeltaTime = deltaTime;
+
+            {
+                std::lock_guard<std::mutex> lock(gameObjectMutex);
+                this->OnUpdate();
+                this->physics->Update(gameObjects);
+            }
+
+            // Sleep a bit to prevent CPU spinning
+            std::this_thread::sleep_for(std::chrono::milliseconds(1));
+        }
+        });
+    //////////////////////
 
     while (!glfwWindowShouldClose(window))
     {
 
-        Time::mCurrentTime = glfwGetTime();
+        Time::mCurrentTime = (float)glfwGetTime();
 
         //physics->SetDeltaTime(now - gLastTime);
         //Time::SetDeltaTime(now - lastTime);
@@ -68,21 +89,27 @@ void Application::Run() {
 
         OnUpdate();
 
-	    physics->Update(gameObjects);
+	    //physics->Update(gameObjects);
+        {
+            std::lock_guard<std::mutex> lock(gameObjectMutex);
 
-        renderer->DrawEditor(editor);
+            renderer->DrawEditor(editor);
 
-        renderer->Draw(gameObjects);
+            renderer->Draw(gameObjects);
+        }
 
         glfwSwapBuffers(window);
         if (Time::mCurrentTime - Time::mLastSecond > 1.0) {
-            Time::mFPS = (1 / Time::mDeltaTime);
+            Time::mFPS = (int)(1.0f / Time::mDeltaTime);
             Time::mLastSecond = Time::mCurrentTime;
         }
         Time::mLastTime = Time::mCurrentTime;
     }
-
+    // Shutdown
     OnEnd();
+    running = false;
+    if (updateThread.joinable())
+        updateThread.join();
     editor->OnClose();
     glfwTerminate();
 }

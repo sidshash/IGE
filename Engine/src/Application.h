@@ -5,8 +5,18 @@
 #include "Window/Window.h"
 #include "Renderer/Renderer.h"
 #include "Editor/Editor.h"
+#include <thread>
+#include <mutex>
+#include <atomic>
+#include <chrono>
 
 class Application: public Observer {
+	//MULTITHREADING STUFF
+	std::thread updateThread;
+	std::mutex gameObjectMutex;
+	std::atomic<bool> running;
+	//////////////////////
+
 	Window* windowHandler;
 
 	Renderer* renderer;
