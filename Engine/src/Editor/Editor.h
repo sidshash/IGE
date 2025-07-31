@@ -13,7 +13,7 @@ class Editor : public Observer, public Subject
 public:
 	Editor();
 	void Init();
-	void Draw(int fps);
+	void Draw();
 	void OnClose();
 	using Subject::AddObserver;
 };

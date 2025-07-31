@@ -8,7 +8,6 @@
 class Editor;
 class Renderer
 {
-	int fps = 0;
 	GLFWwindow* window;
 public:
 	Renderer(GLFWwindow* win) : window(win) 
@@ -19,6 +18,5 @@ public:
 	void Init();
 	void DrawEditor(Editor* editor);
 	void Draw(std::vector<GameObject*> &gameObjects);
-	void SetFPS(int gFps);
 };
 

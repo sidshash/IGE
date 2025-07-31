@@ -63,6 +63,9 @@
     <ClInclude Include="src\Event\Events.h">
       <Filter>Header Files</Filter>
     </ClInclude>
+    <ClInclude Include="src\Time\Time.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="src\Core.cpp">
@@ -99,6 +102,9 @@
       <Filter>Source Files</Filter>
     </ClCompile>
     <ClCompile Include="src\Event\Event.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="src\Time\Time.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
   </ItemGroup>

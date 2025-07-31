@@ -47,7 +47,7 @@ void ViewportPanel::Init() {
 
 void ViewportPanel::OnDraw(){
     char fpsSize[50];
-    std::snprintf(fpsSize, sizeof(fpsSize), "(%.1d FPS)", fps);
+    std::snprintf(fpsSize, sizeof(fpsSize), "(%d FPS)", Time::GetFPS());
     ImGui::Text(fpsSize);
     ImVec2 cursor = ImGui::GetCursorScreenPos();
     ImVec2 avail = ImGui::GetContentRegionAvail();

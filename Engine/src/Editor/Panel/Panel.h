@@ -19,8 +19,6 @@ class Panel : public IPanel {
 
 public:
 
-	void SetFPS(int x);
-
 	Panel(const char* t);
 
 	void SetSelected(IInspectable* selectedItem);

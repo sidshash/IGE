@@ -1,7 +1,5 @@
 #include "Panel.h"
 
-void Panel::SetFPS(int x) { vpPanel.fps = x; }
-
 Panel::Panel(const char* t) :
 
 	IPanel("DockHost"),

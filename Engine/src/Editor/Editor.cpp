@@ -24,14 +24,14 @@ void Editor::Init() {
     ImGui_ImplOpenGL3_Init();
 }
 
-void Editor::Draw(int fps) {
+void Editor::Draw() {
     // 1) Start Dear ImGui frame  ----------------------------
     ImGui_ImplOpenGL3_NewFrame();
     ImGui_ImplGlfw_NewFrame();
     ImGui::NewFrame();
 
     // 1‑A) Build UI – we only gather size here, no renderering yet
-    panel->SetFPS(fps);
+    //panel->SetFPS(fps);
     panel->Draw();
 
     // 3) Rendererer scene into the (possibly) new FBO -------------

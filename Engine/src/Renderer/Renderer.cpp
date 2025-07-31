@@ -26,11 +26,6 @@ void Renderer::Init() {
 }
 
 
-
-void Renderer::SetFPS(int gFps) {
-	fps = gFps;
-}
-
 void Renderer::DrawEditor(Editor *editor) {
-	editor->Draw(fps);
+	editor->Draw();
 }

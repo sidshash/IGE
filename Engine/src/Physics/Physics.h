@@ -1,17 +1,15 @@
 #pragma once
 #include "../Locator/Locator.h"
 #include "../Components/GameObject.h"
+#include <Core.h>
 class Physics
 {
-	float mDeltaTime;
 public:
-	Physics() :
-		mDeltaTime(0)
+	Physics()
 	{
 		Locator::SetPhysics(this);
 		Logger::Log(LogLevel::Info, "Physics Engine Created", "Application");
 	}
-	void SetDeltaTime(float deltaTime);
 	void Update(std::vector<GameObject*> gameObjects);
 };
 

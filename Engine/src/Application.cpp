@@ -45,32 +45,23 @@ Application::Application()
 void Application::Run() {
 	GLFWwindow* window = windowHandler->window;
 
-
-    //frame rate
-    float  gLastTime = (float)glfwGetTime();
-    int     gFrameCount = 0;
-    double  gFPS = 0.0;
-
-    
     renderer->Init();
 
     editor->Init();
 
     OnStart();
 
-    float lastTimeFpsSet = (float)glfwGetTime();
+    Time::mLastTime = glfwGetTime();
+    Time::mLastSecond = glfwGetTime();
 
     while (!glfwWindowShouldClose(window))
     {
 
-        ++gFrameCount;
-        float now = (float)glfwGetTime();
-        if (now - gLastTime >= 1.0) {  // If more than 1 second passed
-            gFPS = gFrameCount / (now - gLastTime);
-            gFrameCount = 0;
-        }
+        Time::mCurrentTime = glfwGetTime();
 
-        physics->SetDeltaTime(now - gLastTime);
+        //physics->SetDeltaTime(now - gLastTime);
+        //Time::SetDeltaTime(now - lastTime);
+        Time::mDeltaTime = Time::mCurrentTime - Time::mLastTime;
 
         glfwPollEvents();
         windowHandler->HandleInput();
@@ -79,17 +70,16 @@ void Application::Run() {
 
 	    physics->Update(gameObjects);
 
-        if ((now - lastTimeFpsSet) > 1.0) {
-            renderer->SetFPS((int)(1.0f / (now - gLastTime)));
-            lastTimeFpsSet = now;
-        }
-
         renderer->DrawEditor(editor);
 
         renderer->Draw(gameObjects);
 
         glfwSwapBuffers(window);
-        gLastTime = now;
+        if (Time::mCurrentTime - Time::mLastSecond > 1.0) {
+            Time::mFPS = (1 / Time::mDeltaTime);
+            Time::mLastSecond = Time::mCurrentTime;
+        }
+        Time::mLastTime = Time::mCurrentTime;
     }
 
     OnEnd();

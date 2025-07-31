@@ -20,7 +20,6 @@ class ViewportPanel: public IPanel
 	void Init();
 public:
 	ViewportPanel();
-	int fps;
 	void DrawOnFB();
 	void OnDraw() override;
 	void PreWindow() override;

@@ -7,7 +7,7 @@ void Physics::Update(std::vector<GameObject*> gameObjects) {
 		
 		if (rb != nullptr) {
 
-			rb->Update(mDeltaTime);
+			rb->Update(Time::GetDeltaTime());
 
 		}
 	}
@@ -22,8 +22,8 @@ void Physics::Update(std::vector<GameObject*> gameObjects) {
 					BoxCollider2D* bc_ = g_->GetComponent<BoxCollider2D>();
 
 					if (rb_ != nullptr && bc_ != nullptr) {
-						if (bc->CheckCollision(bc_, mDeltaTime)) {
-							bc->ResolveCollision(bc_, mDeltaTime);
+						if (bc->CheckCollision(bc_, Time::GetDeltaTime())) {
+							bc->ResolveCollision(bc_, Time::GetDeltaTime());
 						}
 					}
 				}
@@ -33,8 +33,5 @@ void Physics::Update(std::vector<GameObject*> gameObjects) {
 
 }
 
-void Physics::SetDeltaTime(float deltaTime) {
-	mDeltaTime = deltaTime;
-}
 
 

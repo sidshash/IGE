@@ -147,6 +147,7 @@
     <ClInclude Include="src\Math\Vectors\Vector2.h" />
     <ClInclude Include="src\Math\Vectors\Vector3.h" />
     <ClInclude Include="src\Renderer\Vertex\Vertex.h" />
+    <ClInclude Include="src\Time\Time.h" />
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="src\Event\Event.cpp" />
@@ -161,6 +162,7 @@
     <ClCompile Include="src\Logger\Logger.cpp" />
     <ClCompile Include="src\Math\Vectors\Vector2.cpp" />
     <ClCompile Include="src\Math\Vectors\Vector3.cpp" />
+    <ClCompile Include="src\Time\Time.cpp" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Label="ExtensionTargets">
