@@ -4,7 +4,8 @@
 Mesh::Mesh(GameObject* gameObject) :
 	Component(gameObject),
 	mColor(1),
-	drawMode(GL_TRIANGLES)
+	drawMode(GL_TRIANGLES),
+	vao(0), vbo(0), ibo(0)
 {
 	Shader* s = new Shader("src/Assets/Shaders/shader.vs", "src/Assets/Shaders/shader.fs");
 	shader = s;
@@ -15,20 +16,20 @@ void Mesh::LoadMesh(const char* location) {
 	std::ifstream in(location, std::ios::binary);
 	
 	//read vertices size
-	uint32_t vertSize;
-	in.read(reinterpret_cast<char*>(&vertSize), sizeof(uint32_t));
+	size_t vertSize;
+	in.read(reinterpret_cast<char*>(&vertSize), sizeof(size_t));
 
 	//read vertices data
 	vertices.resize(vertSize);
 	in.read(reinterpret_cast<char*>(vertices.data()), sizeof(Vertex) * vertSize);
 
 	//read indices size
-	uint32_t indSize;
+	size_t indSize;
 	in.read(reinterpret_cast<char*>(&indSize), sizeof(indSize));
 
 	//read indices data
 	indices.resize(indSize);
-	in.read(reinterpret_cast<char*>(indices.data()), sizeof(uint32_t) * indSize);
+	in.read(reinterpret_cast<char*>(indices.data()), sizeof(GLuint) * indSize);
 	meshFilePath = location;
 	Upload();
 }
@@ -62,7 +63,7 @@ void Mesh::Draw() {
 		glPolygonMode(GL_FRONT_AND_BACK, GL_LINE);
 
 
-	glDrawElements(GL_TRIANGLES, indices.size(), GL_UNSIGNED_INT, 0);
+	glDrawElements(GL_TRIANGLES, (GLsizei)indices.size(), GL_UNSIGNED_INT, 0);
 }
 
 void Mesh::Upload() {
@@ -76,7 +77,7 @@ void Mesh::Upload() {
 	glBindBuffer(GL_ELEMENT_ARRAY_BUFFER, ibo);
 
 	glBufferData(GL_ARRAY_BUFFER, sizeof(Vertex) * vertices.size(), vertices.data(), GL_STATIC_DRAW);
-	glBufferData(GL_ELEMENT_ARRAY_BUFFER, sizeof(uint32_t) * indices.size(), indices.data(), GL_STATIC_DRAW);
+	glBufferData(GL_ELEMENT_ARRAY_BUFFER, sizeof(size_t) * indices.size(), indices.data(), GL_STATIC_DRAW);
 
 	glEnableVertexAttribArray(0); // position
 	glVertexAttribPointer(
@@ -118,18 +119,18 @@ void Mesh::WriteMesh() {
 	std::ofstream out(meshFilePath, std::ios::binary);
 
 	//write vertices size
-	uint32_t vertSize = vertices.size();
-	out.write(reinterpret_cast<char*>(&vertSize), sizeof(uint32_t));
+	size_t vertSize = vertices.size();
+	out.write(reinterpret_cast<char*>(&vertSize), sizeof(size_t));
 
 	//write vertices data
 	out.write(reinterpret_cast<char*>(vertices.data()), sizeof(Vertex) * vertSize);
 
 	//write indices size
-	uint32_t indSize = indices.size();;
+	size_t indSize = indices.size();;
 	out.write(reinterpret_cast<char*>(&indSize), sizeof(indSize));
 
 	//write indices data
-	out.write(reinterpret_cast<char*>(indices.data()), sizeof(uint32_t) * indSize);
+	out.write(reinterpret_cast<char*>(indices.data()), sizeof(GLuint) * indSize);
 }
 
 Vector3 Mesh::GetColor() const {

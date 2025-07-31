@@ -14,8 +14,8 @@ public:
 	}
 
 	// READ UINT
-	static void ReadInt(uint32_t& x, std::ifstream& in) {
-		in.read(reinterpret_cast<char*>(&x), sizeof(int));
+	static void ReadInt(size_t& x, std::ifstream& in) {
+		in.read(reinterpret_cast<char*>(&x), sizeof(size_t));
 	}
 
 	//	READ FLOAT
@@ -25,7 +25,7 @@ public:
 
 	//	READ STRING
 	static void ReadString(std::string& str, std::ifstream& in) {
-		uint32_t size;
+		size_t size;
 		in.read(reinterpret_cast<char*>(&size), sizeof(size));
 		str.resize(size);
 		in.read(reinterpret_cast<char*>(str.data()), size);
@@ -63,7 +63,7 @@ public:
 
 	//	READ VECTOR OF VERTICES
 	static void ReadVertices(std::vector<Vertex>& vertices, std::ifstream& in) {
-		uint32_t size;
+		size_t size;
 		ReadInt(size, in);
 		vertices.resize(size);
 		in.read(reinterpret_cast<char*>(vertices.data()), sizeof(Vertex) * size);
@@ -71,7 +71,7 @@ public:
 
 	// READ VECTOR OF INDICES
 	static void ReadIndices(std::vector<GLuint>& indices, std::ifstream& in) {
-		uint32_t size;
+		size_t size;
 		ReadInt(size, in);
 		indices.resize(size);
 		in.read(reinterpret_cast<char*>(indices.data()), sizeof(GLuint) * size);
@@ -106,11 +106,11 @@ public:
 		ReadString(gameobject.mName, in);
 
 		//COMPONENT DESERIALIZATION
-		uint32_t size;
+		size_t size;
 		ReadInt(size, in);
 
-		for (uint32_t i = 0; i < size; i++) {
-			uint32_t id;
+		for (size_t i = 0; i < size; i++) {
+			size_t id;
 			ReadInt(id, in);
 			ComponentType type = static_cast<ComponentType>(id);
 			switch (type) {
@@ -156,9 +156,9 @@ public:
 
 	//	READ SCENE
 	static void ReadScene(std::vector<GameObject*>& gameobjects, std::ifstream& in) {
-		uint32_t size;
+		size_t size;
 		ReadInt(size, in);
-		for (uint32_t i = 0; i < size; i++) {
+		for (size_t i = 0; i < size; i++) {
 			GameObject* gameObject = new GameObject("GameObject");
 			ReadGameObject(*gameObject, in);
 			gameobjects.push_back(gameObject);

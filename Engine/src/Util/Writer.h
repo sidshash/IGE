@@ -9,7 +9,7 @@ public:
 
 	// STRING WRITER
 	static void WriteString(std::string& string, std::ofstream& out) {
-		uint32_t size = string.size();
+		size_t size = string.size();
 		WriteInt(size, out);
 		out.write(string.c_str(), size);
 	}
@@ -20,8 +20,8 @@ public:
 	}
 
 	// UNSIGNED INT WRITER
-	static void WriteInt(uint32_t& x, std::ofstream& out) {
-		out.write(reinterpret_cast<char*>(&x), sizeof(x));
+	static void WriteInt(size_t& x, std::ofstream& out) {
+		out.write(reinterpret_cast<char*>(&x), sizeof(size_t));
 	}
 
 	//  FLOAT WRITER
@@ -61,14 +61,14 @@ public:
 
 	//	VECTOR OF VERTICES WRITER
 	static void WriteVertices(std::vector<Vertex>& vertices, std::ofstream& out) {
-		uint32_t size = vertices.size();
+		size_t size = vertices.size();
 		WriteInt(size, out);
 		out.write(reinterpret_cast<char*>(vertices.data()), sizeof(Vertex) * size);
 	}
 
 	// VECTOR OF INDICES WRITER
 	static void WriteIndices(std::vector<GLuint>& indices, std::ofstream& out) {
-		uint32_t size = indices.size();
+		size_t size = indices.size();
 		WriteInt(size, out);
 		out.write(reinterpret_cast<char*>(indices.data()), sizeof(GLuint) * size);
 	}
@@ -102,11 +102,11 @@ public:
 		WriteString(gameobject.mName, out);
 		
 		// COMPONENT SERIALIZATION
-		uint32_t size = gameobject.components.size();
+		size_t size = gameobject.components.size();
 		WriteInt(size, out);
 		for (Component* component : gameobject.components) {
 			ComponentType type = component->GetType();
-			uint32_t id = static_cast<uint32_t>(type);
+			size_t id = static_cast<size_t>(type);
 			WriteInt(id, out);
 			switch (type) {
 			case ComponentType::Transform: {	//TRANSFORM COMPONENT
@@ -135,7 +135,7 @@ public:
 
 	//	WRITE SECENEf
 	static void WriteScene(std::vector<GameObject*>& gameobjects, std::ofstream& out) {
-		uint32_t size = gameobjects.size();
+		size_t size = gameobjects.size();
 		WriteInt(size, out);
 		for (GameObject* gameobject : gameobjects) {
 			WriteGameObject(*gameobject, out);

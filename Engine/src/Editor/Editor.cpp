@@ -2,7 +2,8 @@
 #include "../Application.h"
 
 Editor::Editor() :
-    windowHandler(Locator::GetApplication()->GetWindow())
+    windowHandler(Locator::GetApplication()->GetWindow()),
+    panel(nullptr)
 {
     Logger::Log(LogLevel::Info, "Editor Created", "Application");
 }
@@ -23,7 +24,7 @@ void Editor::Init() {
     ImGui_ImplOpenGL3_Init();
 }
 
-void Editor::Draw(float fps) {
+void Editor::Draw(int fps) {
     // 1) Start Dear ImGui frame  ----------------------------
     ImGui_ImplOpenGL3_NewFrame();
     ImGui_ImplGlfw_NewFrame();

@@ -23,7 +23,7 @@ extern ENGINE_API std::string RESET_COLOR;
 
 class ENGINE_API Logger {
 public:
-    static void Log(LogLevel level, const char* message, const const char* source = "");
+    static void Log(LogLevel level, const char* message, const char* source = "");
     //static void Log(LogLevel level, const Vector3& vector, const std::string& source = "");
 
 private:

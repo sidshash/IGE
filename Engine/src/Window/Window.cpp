@@ -42,22 +42,22 @@ int Window::Init() {
 
 void Window::HandleInput() {
     if (glfwGetKey(window, GLFW_KEY_ESCAPE) == GLFW_PRESS)
-        onEvent(new Event({ EventName::KEYPRESS, EventType::INPUT, (void*)&KEY_ESC }));
+        onEvent(new Event({ EventName::KEYPRESS, EventType::INPUT, reinterpret_cast<void*>(static_cast<uintptr_t>(KEY::ESC))}));
     if (glfwGetKey(window, GLFW_KEY_W) == GLFW_PRESS)
-        onEvent(new Event({ EventName::KEYPRESS, EventType::INPUT, (void*)&KEY_W }));
+        onEvent(new Event({ EventName::KEYPRESS, EventType::INPUT, reinterpret_cast<void*>(static_cast<uintptr_t>(KEY::W))}));
     if (glfwGetKey(window, GLFW_KEY_A) == GLFW_PRESS)
-        onEvent(new Event({ EventName::KEYPRESS, EventType::INPUT, (void*)&KEY_A }));
+        onEvent(new Event({ EventName::KEYPRESS, EventType::INPUT, reinterpret_cast<void*>(static_cast<uintptr_t>(KEY::A))}));
     if (glfwGetKey(window, GLFW_KEY_S) == GLFW_PRESS)
-        onEvent(new Event({ EventName::KEYPRESS, EventType::INPUT, (void*)&KEY_S }));
+        onEvent(new Event({ EventName::KEYPRESS, EventType::INPUT, reinterpret_cast<void*>(static_cast<uintptr_t>(KEY::S))}));
     if (glfwGetKey(window, GLFW_KEY_D) == GLFW_PRESS)
-        onEvent(new Event({ EventName::KEYPRESS, EventType::INPUT, (void*)&KEY_D }));
+        onEvent(new Event({ EventName::KEYPRESS, EventType::INPUT, reinterpret_cast<void*>(static_cast<uintptr_t>(KEY::D))}));
 
 }
 
 void Window::onNotify (Event *e) {
     switch (e->name) {      //switch case for different window events
     case EventName::KEYPRESS:
-        KEY key = *static_cast<KEY*>(e->data);
+        KEY key = static_cast<KEY>(reinterpret_cast<uintptr_t>(e->data));
         switch (key) {     //switch case for individual key check
         case KEY::ESC:
             glfwSetWindowShouldClose(window, true);

@@ -1,4 +1,5 @@
 #pragma once
+#include "Script/Script.h"
 #include <vector>
 #include "Component.h"
 #include <iostream>
@@ -9,7 +10,6 @@
 #include "Mesh/Mesh.h"
 #include "Rigidbody/Rigidbody.h"
 #include "BoxCollider2D/BoxCollider2D.h"
-#include "Script/Script.h"
 #include <Core.h>
 class GameObject: public IInspectable, public IGameObject
 {

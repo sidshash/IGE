@@ -1,10 +1,10 @@
 #pragma once
 #include <vector>
-#include "Window/Window.h"
 #include "Physics/Physics.h"
+#include "Camera/Camera.h"
+#include "Window/Window.h"
 #include "Renderer/Renderer.h"
 #include "Editor/Editor.h"
-#include "Camera/Camera.h"
 
 class Application: public Observer {
 	Window* windowHandler;

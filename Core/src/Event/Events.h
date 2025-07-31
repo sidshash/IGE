@@ -8,11 +8,6 @@ enum class ENGINE_API KEY {
 	Z,X,C,V,B,N,M
 };
 
-constexpr KEY KEY_ESC = KEY::ESC;
-constexpr KEY KEY_W = KEY::W;
-constexpr KEY KEY_A = KEY::A;
-constexpr KEY KEY_S = KEY::S;
-constexpr KEY KEY_D = KEY::D;
 
 enum class ENGINE_API EventName {
 	KEYPRESS,

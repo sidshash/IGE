@@ -2,8 +2,6 @@
 #include "../Component.h"
 #include "../GameObject.h"
 #include <Core.h>
-#define NOMINMAX
-#include <Windows.h>
 #include "../../Util/ScriptAPI.h"
 class Script: public Component, public IScript
 {

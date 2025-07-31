@@ -1,10 +1,10 @@
 #pragma once
 #include "../IPanel.h"
-#include <GL/glew.h>
-#include <GLFW/glfw3.h>
 #include <functional>
 #include <iostream>
 #include "../../../Locator/Locator.h"
+#include <GL/glew.h>
+#include <GLFW/glfw3.h>
 class Window;
 class ViewportPanel: public IPanel
 {
@@ -20,7 +20,7 @@ class ViewportPanel: public IPanel
 	void Init();
 public:
 	ViewportPanel();
-	float fps;
+	int fps;
 	void DrawOnFB();
 	void OnDraw() override;
 	void PreWindow() override;

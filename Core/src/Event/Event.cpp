@@ -6,6 +6,8 @@ inline const char* EventNameToString(Event* e) {
 		return "Key Press";
 	case EventName::CREATE_GAME_OBJECT:
 		return "Create Game Object";
+	default:
+		return "";
 	}
 }
 
@@ -15,5 +17,7 @@ inline const char* EventTypeTypeToString(Event* e) {
 		return "Input";
 	case EventType::EDITOR:
 		return "Editor";
+	default:
+		return "";
 	}
 }

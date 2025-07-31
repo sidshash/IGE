@@ -1,9 +1,11 @@
 #pragma once
+#define WIN32_LEAN_AND_MEAN
+#define NOMINMAX
+#include <Windows.h>
 #include <string>
 #include <fstream>
 #include <filesystem>
 #include <Core.h>
-#include <Windows.h>
 class Script;
 typedef ScriptBehaviour* (*CreateScriptInstanceFunc)();
 

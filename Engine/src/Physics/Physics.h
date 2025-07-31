@@ -3,7 +3,7 @@
 #include "../Components/GameObject.h"
 class Physics
 {
-	double mDeltaTime;
+	float mDeltaTime;
 public:
 	Physics() :
 		mDeltaTime(0)

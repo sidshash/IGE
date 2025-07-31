@@ -27,7 +27,7 @@ void Renderer::Init() {
 
 
 
-void Renderer::SetFPS(float gFps) {
+void Renderer::SetFPS(int gFps) {
 	fps = gFps;
 }
 

@@ -19,7 +19,7 @@ class Panel : public IPanel {
 
 public:
 
-	void SetFPS(float x);
+	void SetFPS(int x);
 
 	Panel(const char* t);
 
