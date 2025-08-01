@@ -37,6 +37,10 @@ Application::Application()
     renderer = new Renderer(windowHandler->window);
     physics = new Physics();
 
+    //STATE
+    running = false;
+    physicsRunning = false;
+
     //SET OBSERVER
     windowHandler->AddObserver(this);
     editor->AddObserver(this);
@@ -58,6 +62,10 @@ void Application::Run() {
     running = true;
     updateThread = std::thread([this]() {
         while (running) {
+            if (!physicsRunning) {
+                std::this_thread::sleep_for(std::chrono::milliseconds(1));
+                continue;
+            }
             float now = (float)glfwGetTime();
             float deltaTime = now - Time::mLastTime;
             Time::mLastTime = now;
@@ -129,6 +137,11 @@ Editor* Application::GetEditor() { return editor; }
 
 std::vector<GameObject*>* Application::GetObjectList() {
     return &gameObjects;
+}
+
+std::atomic<bool>& Application::GetPhysicsState()
+{
+    return physicsRunning;
 }
 
 

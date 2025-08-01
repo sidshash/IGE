@@ -9,6 +9,7 @@ ViewportPanel::ViewportPanel() :
     fbHeight = windowHandler->HEIGHT;
     Init();
     SetFlags(windowFlags);
+    isRunning = false;
 }
 
 void ViewportPanel::Init() {
@@ -46,9 +47,15 @@ void ViewportPanel::Init() {
 }
 
 void ViewportPanel::OnDraw(){
+    //FPS
     char fpsSize[50];
     std::snprintf(fpsSize, sizeof(fpsSize), "(%d FPS)", Time::GetFPS());
     ImGui::Text(fpsSize);
+
+    //PLAY BUTTON
+    if (ImGui::Checkbox("PLAY", &isRunning)) {
+        Locator::GetApplication()->GetPhysicsState().store(isRunning);
+    }
 
     ImVec2 cursor = ImGui::GetCursorScreenPos();
     ImVec2 avail = ImGui::GetContentRegionAvail();

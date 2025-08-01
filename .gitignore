@@ -361,3 +361,9 @@ MigrationBackup/
 
 # Fody - auto-generated XML schema
 FodyWeavers.xsd
+
+#imgui runtime generated files
+Engine/imgui.ini
+
+# devlog file
+logs.md

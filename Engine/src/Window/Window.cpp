@@ -37,6 +37,7 @@ int Window::Init() {
     if (glewInit() != GLEW_OK)
         return -1;
 
+    return 0;
     
 }
 

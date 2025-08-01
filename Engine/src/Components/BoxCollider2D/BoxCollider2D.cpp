@@ -98,7 +98,7 @@ bool BoxCollider2D::CheckCollision(BoxCollider2D* b, float deltaTime) {
         }
         return true;
     }
-
+    return false;
 }
 
 

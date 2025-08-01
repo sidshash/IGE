@@ -11,6 +11,7 @@ class ViewportPanel: public IPanel
 	GLuint fbo, depthRbo, colorTexture;
 	int fbWidth, fbHeight;
 	Window* windowHandler;
+	bool isRunning;
 	std::function<void(int, int)> ResizeFramebuffer;
 	ImGuiWindowFlags windowFlags =
 		ImGuiWindowFlags_NoTitleBar |

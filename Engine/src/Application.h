@@ -15,6 +15,7 @@ class Application: public Observer {
 	std::thread updateThread;
 	std::mutex gameObjectMutex;
 	std::atomic<bool> running;
+	std::atomic<bool> physicsRunning;
 	//////////////////////
 
 	Window* windowHandler;
@@ -35,4 +36,5 @@ public:
 	Window* GetWindow();
 	Editor* GetEditor();
 	std::vector<GameObject*>* GetObjectList();
+	std::atomic<bool>& GetPhysicsState();
 };
