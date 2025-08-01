@@ -131,6 +131,7 @@
     </Link>
   </ItemDefinitionGroup>
   <ItemGroup>
+    <ClInclude Include="src\Math\Quaternion\Quaternion.h" />
     <ClInclude Include="src\Event\Event.h" />
     <ClInclude Include="src\Event\Events.h" />
     <ClInclude Include="src\Interfaces\Components\IScript.h" />
@@ -150,6 +151,7 @@
     <ClInclude Include="src\Time\Time.h" />
   </ItemGroup>
   <ItemGroup>
+    <ClCompile Include="src\Math\Quaternion\Quaternion.cpp" />
     <ClCompile Include="src\Event\Event.cpp" />
     <ClCompile Include="src\Interfaces\Components\IScript.cpp" />
     <ClCompile Include="src\ScriptBehaviour\ScriptBehaviour.cpp" />

@@ -49,7 +49,28 @@ void Mesh::Draw() {
 	//glm::mat4 model(1);
 	Vector3 position = t->GetPosition();
 	Vector3 scale = t->GetScale();
+	Vector3 rotation = t->GetRotation();
+
+	//TRANSLATION
+
 	glm::mat4 model = glm::translate(glm::mat4(1.0f), glm::vec3(position.x, position.y, position.z));
+
+	//ROTATION
+
+	glm::vec3 rad = glm::radians(glm::vec3(rotation.x, rotation.y, rotation.z));
+	// Create individual quaternions
+	glm::quat qYaw = glm::angleAxis(rad.y, glm::vec3(0, 1, 0)); // Yaw around Y
+	glm::quat qPitch = glm::angleAxis(rad.x, glm::vec3(1, 0, 0)); // Pitch around X
+	glm::quat qRoll = glm::angleAxis(rad.z, glm::vec3(0, 0, 1)); // Roll around Z
+
+	// Combine: Final = Yaw * Pitch * Roll
+	glm::quat orientation = qYaw * qPitch * qRoll;
+
+	glm::mat4 rotationMatrix = glm::toMat4(orientation);
+
+	model *= rotationMatrix;
+
+	//SCALE
 	model = glm::scale(model, glm::vec3(scale.x, scale.y, scale.z));
 
 	glm::mat4 mvp = projection * model;

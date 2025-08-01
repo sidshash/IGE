@@ -9,6 +9,7 @@
 #include <glm/glm.hpp>
 #include "../Transform/Transform.h"
 #include <glm/gtc/matrix_transform.hpp>
+#include <glm/gtx/quaternion.hpp>
 #include <format>
 #include <Core.h>
 class Camera;

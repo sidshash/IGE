@@ -93,6 +93,7 @@ void Application::Run() {
         {
             std::lock_guard<std::mutex> lock(gameObjectMutex);
 
+
             renderer->DrawEditor(editor);
 
             renderer->Draw(gameObjects);
@@ -129,6 +130,7 @@ Editor* Application::GetEditor() { return editor; }
 std::vector<GameObject*>* Application::GetObjectList() {
     return &gameObjects;
 }
+
 
 
 
