@@ -21,3 +21,9 @@ inline const char* EventTypeTypeToString(Event* e) {
 		return "";
 	}
 }
+
+const KEY Event::GetKey() const {
+	KEY key = static_cast<KEY>(reinterpret_cast<uintptr_t>(data));
+	return key;
+}
+

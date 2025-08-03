@@ -20,7 +20,8 @@ void Physics::ApplyPhysics(Rigidbody& rb)
 
 void Physics::AddForce(Vector3 force, Rigidbody* rb) {
 	Vector3 acceleration = rb->GetAcceleration();
-	acceleration = acceleration + force;
+	unsigned int inverseMass = rb->GetInverseMass();
+	acceleration = acceleration + force * inverseMass;
 	rb->SetAcceleration(acceleration);
 }
 
