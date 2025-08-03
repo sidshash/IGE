@@ -15,7 +15,7 @@ class Rigidbody : public Component, public IRigidbody
 
 	//LINEAR
 	bool mGravity;
-	unsigned int mInverseMass;
+	float mInverseMass;
 	Vector3 mVelocity, mAcceleration;
 	float mRestitution;
 	float mDrag;
@@ -31,7 +31,7 @@ public:
 	Vector3 GetVelocity() const override;
 	Vector3 GetAcceleration() const override;
 	float GetRestitution() const override;
-	unsigned int GetInverseMass() const override;
+	float GetInverseMass() const override;
 	float GetDrag() const override;
 
 	//SETTERS
@@ -39,7 +39,7 @@ public:
 	void SetVelocity(const Vector3& velocity) override;
 	void SetAcceleration(const Vector3& acceleration) override;
 	void SetRestitution(const float restitution) override;
-	void SetInverseMass(const unsigned int inverseMass) override;
+	void SetInverseMass(float inverseMass) override;
 	void SetDrag(const float drag) override;
 
 	void Integrate(float dt);

@@ -22,3 +22,7 @@ Vector3 Vector3::operator*(const Vector3& other) const {
 	result.z = z * other.z;
 	return (Vector3(result.x, result.y, result.z));
 }
+
+const float Vector3::Magnitude() const {
+	return sqrtf(x * x + y * y + z * z);
+}

@@ -10,7 +10,7 @@ Rigidbody::Rigidbody(GameObject* gO) :
 	mInverseMass(1),
 	mAngularVelocity(0),
 	mAngularAcceleration(0),
-	mDrag(0.5f)
+	mDrag(0.6575f)
 {
 	Locator::GetPhysics()->RegisterForce(this);
 }
@@ -37,7 +37,7 @@ float Rigidbody::GetRestitution() const
 	return mRestitution;
 }
 
-unsigned int Rigidbody::GetInverseMass() const
+float Rigidbody::GetInverseMass() const
 {
 	return mInverseMass;
 }
@@ -69,7 +69,7 @@ void Rigidbody::SetRestitution(const float restitution)
 	mRestitution = restitution;
 }
 
-void Rigidbody::SetInverseMass(const unsigned int inverseMass)
+void Rigidbody::SetInverseMass(float inverseMass)
 {
 	mInverseMass = inverseMass;
 }

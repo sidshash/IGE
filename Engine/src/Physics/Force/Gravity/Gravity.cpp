@@ -2,9 +2,8 @@
 
 void Gravity::ApplyForce(Rigidbody& rb)
 {
-	Vector3 acceleration = rb.GetAcceleration();
-	acceleration.y -= 9.91f;
-	rb.SetAcceleration(acceleration);
+	float inverseMass = rb.GetInverseMass();
+	rb.AddForce(Vector3(0, -10.0f / inverseMass, 0));
 }
 
 

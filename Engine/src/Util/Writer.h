@@ -86,6 +86,8 @@ public:
 		WriteVector3(rb.mVelocity, out);
 		WriteVector3(rb.mAcceleration, out);
 		WriteFloat(rb.mRestitution, out);
+		WriteFloat(rb.mInverseMass, out);
+		WriteFloat(rb.mDrag, out);
 	}
 
 	//	BOX COLLIDER 2D COMPONENT WRITER

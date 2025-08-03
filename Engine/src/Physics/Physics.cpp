@@ -20,15 +20,22 @@ void Physics::ApplyPhysics(Rigidbody& rb)
 
 void Physics::AddForce(Vector3 force, Rigidbody* rb) {
 	Vector3 acceleration = rb->GetAcceleration();
-	unsigned int inverseMass = rb->GetInverseMass();
+	float inverseMass = rb->GetInverseMass();
 	acceleration = acceleration + force * inverseMass;
 	rb->SetAcceleration(acceleration);
 }
 
 void Physics::RegisterForce(Rigidbody* rigidbody)
 {
+	//REGISTER DRAG FORCE
 	Drag* dragForce = new Drag();
 	registry.Add(dragForce, rigidbody);
+
+	//REGISTER GRAVITATIONAL FORCE	
+	//if (rigidbody->isGravity()) {
+		Gravity* gravity = new Gravity();
+		registry.Add(gravity, rigidbody);
+	//}
 }
 
 

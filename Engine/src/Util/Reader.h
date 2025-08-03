@@ -90,6 +90,8 @@ public:
 		ReadVector3(rb.mVelocity, in);
 		ReadVector3(rb.mAcceleration, in);
 		ReadFloat(rb.mRestitution, in);
+		ReadFloat(rb.mInverseMass, in);
+		ReadFloat(rb.mDrag, in);
 	}
 
 	//	READ BOX COLLIDER 2D COMPONENT 

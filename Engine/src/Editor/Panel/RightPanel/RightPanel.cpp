@@ -198,6 +198,7 @@ void RightPanel::DrawMesh(Mesh* m) {
 
 void RightPanel::DrawRigidbody(Rigidbody* rb) {
 	if (ImGui::CollapsingHeader("Rigidbody", ImGuiTreeNodeFlags_DefaultOpen)) {
+		ImGui::DragFloat("Inverse Mass", &rb->mInverseMass);
 		ImGui::Checkbox("Gravity", &rb->mGravity);
 		ImGui::DragFloat3("Velocity", &rb->mVelocity.x);
 		ImGui::DragFloat3("Acceleration", &rb->mAcceleration.x);

@@ -3,6 +3,7 @@
 #include "../Components/GameObject.h"
 #include "Force/ForceRegistry.hpp"
 #include "Force/Drag/Drag.h"
+#include "Force/Gravity/Gravity.h"
 #include <Core.h>
 class Physics
 {

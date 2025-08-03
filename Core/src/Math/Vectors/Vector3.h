@@ -30,6 +30,8 @@ public:
 			return Vector3(0.0f, 0.0f, 0.0f); // Avoid division by zero
 		return Vector3(x / len, y / len, z / len);
 	}
+
+	const float Magnitude() const ;
 	
 	static const Vector3 UP;
 	static const Vector3 DOWN;
