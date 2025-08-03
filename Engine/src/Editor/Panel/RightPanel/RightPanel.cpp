@@ -202,6 +202,7 @@ void RightPanel::DrawRigidbody(Rigidbody* rb) {
 		ImGui::DragFloat3("Velocity", &rb->mVelocity.x);
 		ImGui::DragFloat3("Acceleration", &rb->mAcceleration.x);
 		ImGui::DragFloat("Restitution", &rb->mRestitution, 0.1f);
+		ImGui::DragFloat("Drag", &rb->mDrag, 0.1f);
 	}
 }
 

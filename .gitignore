@@ -367,3 +367,7 @@ Engine/imgui.ini
 
 # devlog file
 logs.md
+
+#custom script / user generated
+/Engine/src/Assets/Scripts
+/Engine/src/Assets/Scenes

@@ -6,26 +6,13 @@ Rigidbody::Rigidbody(GameObject* gO) :
 	mVelocity(0),
 	mAcceleration(0),
 	mGravity(false),
-	mRestitution(1)
+	mRestitution(1),
+	mInverseMass(1),
+	mAngularVelocity(0),
+	mAngularAcceleration(0),
+	mDrag(0.5f)
 {
-}
-
-
-
-void Rigidbody::Update(float deltaTime) {
-
-	Transform* t = gameObject->GetComponent<Transform>();
-
-	if (t == nullptr) return;
-
-	mVelocity = mVelocity + ((mGravity? Vector3(mAcceleration.x, mAcceleration.y - 9.81f, mAcceleration.z) : mAcceleration) * deltaTime);
-
-	Vector3 position = t->GetPosition();
-
-	position = position + (mVelocity * deltaTime);
-
-	t->SetPosition(position);
-
+	Locator::GetPhysics()->RegisterForce(this);
 }
 
 // GETTERS
@@ -50,6 +37,16 @@ float Rigidbody::GetRestitution() const
 	return mRestitution;
 }
 
+unsigned int Rigidbody::GetInverseMass() const
+{
+	return mInverseMass;
+}
+
+float Rigidbody::GetDrag() const
+{
+	return mDrag;
+}
+
 //	SETTERS
 
 void Rigidbody::SetGravity(const bool a)
@@ -70,4 +67,47 @@ void Rigidbody::SetAcceleration(const Vector3& acceleration)
 void Rigidbody::SetRestitution(const float restitution)
 {
 	mRestitution = restitution;
+}
+
+void Rigidbody::SetInverseMass(const unsigned int inverseMass)
+{
+	mInverseMass = inverseMass;
+}
+
+void Rigidbody::SetDrag(const float drag)
+{
+	mDrag = drag;
+}
+
+void Rigidbody::Integrate(float dt)
+{
+
+	Transform* transform = gameObject->GetComponent<Transform>();
+	if (transform == nullptr) return;	//TRANSFORM DOESN'T EXIST TO UPDATE POSITION
+
+	Transform& t = *transform;
+
+	//INTEGRATE POSITION
+	
+	mVelocity = mVelocity + mAcceleration * dt;
+
+	Vector3 position = t.GetPosition();
+	position = position + mVelocity * dt;
+	t.SetPosition(position);
+
+	//INTEGRATE ROTATION
+	mAngularVelocity = mAngularVelocity + mAngularAcceleration * dt;
+	Vector3 rotation = t.GetRotation();
+	rotation = rotation + mAngularVelocity * dt;
+	t.SetRotation(rotation);
+
+	//RESET ACCUMULATORS
+	mAcceleration = Vector3(0);
+	mAngularAcceleration = Vector3(0);
+
+}
+
+void Rigidbody::AddForce(Vector3 force)
+{
+	Locator::GetPhysics()->AddForce(force, this);
 }

@@ -12,13 +12,13 @@ public:
 
 	Vector3() : x(0), y(0), z(0) {}
 		  
-	Vector3 operator+(const Vector3& other);	//vector addition
+	Vector3 operator+(const Vector3& other) const;	//vector addition
 		  
-	Vector3 operator-(const Vector3& other);	//vector subtaction
+	Vector3 operator-(const Vector3& other) const;	//vector subtaction
 		  
-	Vector3 operator*(const float val); //scalar multiplication
+	Vector3 operator*(const float val) const; //scalar multiplication
 		  
-	Vector3 operator*(const Vector3& other);
+	Vector3 operator*(const Vector3& other) const;
 
 	float Length() const {
 		return std::sqrt(x * x + y * y + z * z);
@@ -30,5 +30,10 @@ public:
 			return Vector3(0.0f, 0.0f, 0.0f); // Avoid division by zero
 		return Vector3(x / len, y / len, z / len);
 	}
+	
+	static const Vector3 UP;
+	static const Vector3 DOWN;
+	static const Vector3 RIGHT;
+	static const Vector3 LEFT;
 };
 

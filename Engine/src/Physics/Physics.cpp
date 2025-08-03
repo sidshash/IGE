@@ -1,37 +1,36 @@
 #include "Physics.h"
 
 void Physics::Update(std::vector<GameObject*>& gameObjects) {
-	for(GameObject* g : gameObjects) {
-		Rigidbody* rb = g->GetComponent<Rigidbody>();
-		BoxCollider2D* bc = g->GetComponent<BoxCollider2D>();
-		
+
+	//FIRST APPLY FORCES HERE
+	registry.updateForces();
+
+	for (GameObject* gameObject : gameObjects) {
+		Rigidbody* rb = gameObject->GetComponent<Rigidbody>();
 		if (rb != nullptr) {
-
-			rb->Update(Time::GetDeltaTime());
-
+			ApplyPhysics(*rb);
 		}
 	}
-
-	for (GameObject* g : gameObjects) {
-		Rigidbody* rb = g->GetComponent<Rigidbody>();
-		BoxCollider2D* bc = g->GetComponent<BoxCollider2D>();
-		if (rb != nullptr && bc != nullptr) {
-			for (GameObject* g_ : gameObjects) {
-				if (g != g_) {
-					Rigidbody* rb_ = g_->GetComponent<Rigidbody>();
-					BoxCollider2D* bc_ = g_->GetComponent<BoxCollider2D>();
-
-					if (rb_ != nullptr && bc_ != nullptr) {
-						if (bc->CheckCollision(bc_, Time::GetDeltaTime())) {
-							bc->ResolveCollision(bc_, Time::GetDeltaTime());
-						}
-					}
-				}
-			}
-		}
-	}
-
 }
+
+void Physics::ApplyPhysics(Rigidbody& rb)
+{
+	rb.Integrate(Time::GetDeltaTime());
+}
+
+void Physics::AddForce(Vector3 force, Rigidbody* rb) {
+	Vector3 acceleration = rb->GetAcceleration();
+	acceleration = acceleration + force;
+	rb->SetAcceleration(acceleration);
+}
+
+void Physics::RegisterForce(Rigidbody* rigidbody)
+{
+	Drag* dragForce = new Drag();
+	registry.Add(dragForce, rigidbody);
+}
+
+
 
 
 
