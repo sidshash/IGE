@@ -5,7 +5,8 @@ Panel::Panel(const char* t) :
 	IPanel("DockHost"),
 	leftPanel(this),
 	vpPanel(),
-	rightPanel()
+	rightPanel(),
+	bottomPanel()
 
 {
 	Fullscreen = true;
@@ -21,6 +22,7 @@ void Panel::OnDraw() {
 
 	leftPanel.Draw();
 	vpPanel.Draw();
+	bottomPanel.Draw();
 	rightPanel.Draw();
 
 }
@@ -64,16 +66,20 @@ void Panel::DrawDockSpace()
 		ImGui::DockBuilderRemoveNode(dockID);              // clear old layout
 		ImGui::DockBuilderAddNode(dockID, ImGuiDockNodeFlags_DockSpace);
 		ImGui::DockBuilderSetNodeSize(dockID, vp->WorkSize);
+// Split: 20% left, 60% middle, 20% right
+ImGuiID left, center, right;
+ImGui::DockBuilderSplitNode(dockID, ImGuiDir_Left, 0.20f, &left, &center);
+ImGui::DockBuilderSplitNode(center, ImGuiDir_Right, 0.25f, &right, &center);
 
-		// Split: 20?% left, 60?% middle, 20?% right
-		ImGuiID left, center, right;
-		ImGui::DockBuilderSplitNode(dockID, ImGuiDir_Left, 0.20f, &left, &center);
-		ImGui::DockBuilderSplitNode(center, ImGuiDir_Right, 0.25f, &right, &center);
+// Now split center vertically to put Assets panel at bottom
+ImGuiID centerTop, centerBottom;
+ImGui::DockBuilderSplitNode(center, ImGuiDir_Down, 0.25f, &centerBottom, &centerTop);
 
-		// Dock our windows by *name*
-		ImGui::DockBuilderDockWindow("Hierarchy", left);
-		ImGui::DockBuilderDockWindow("Viewport", center);
-		ImGui::DockBuilderDockWindow("Inspector", right);
+// Dock our windows by *name*
+ImGui::DockBuilderDockWindow("Hierarchy", left);
+ImGui::DockBuilderDockWindow("Viewport", centerTop);
+ImGui::DockBuilderDockWindow("Assets", centerBottom);
+ImGui::DockBuilderDockWindow("Inspector", right);
 
 		ImGui::DockBuilderFinish(dockID);                   // done
 	}

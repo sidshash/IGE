@@ -2,6 +2,7 @@
 #include "LeftPanel/LeftPanel.h"
 #include "ViewportPanel/ViewportPanel.h"
 #include "RightPanel/RightPanel.h"
+#include "BottomPanel/BottomPanel.h"
 
 class Panel : public IPanel {
 
@@ -16,6 +17,8 @@ class Panel : public IPanel {
 	ViewportPanel vpPanel;
 
 	RightPanel rightPanel;
+
+	BottomPanel bottomPanel;
 
 public:
 
