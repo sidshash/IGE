@@ -155,6 +155,7 @@
     </Link>
   </ItemDefinitionGroup>
   <ItemGroup>
+    <ClCompile Include="src\Util\FileSystem.cpp" />
     <ClCompile Include="src\Util\AssetLoader.cpp" />
     <ClCompile Include="src\Editor\Panel\BottomPanel\BottomPanel.cpp" />
     <ClCompile Include="src\Physics\Force\Drag\Drag.cpp" />
@@ -196,6 +197,7 @@
     <ClCompile Include="src\Window\Window.cpp" />
   </ItemGroup>
   <ItemGroup>
+    <ClInclude Include="src\Util\FileSystem.h" />
     <ClInclude Include="src\Util\AssetLoader.h" />
     <ClInclude Include="src\dependencies\include\stb_image.h" />
     <ClInclude Include="src\Editor\Panel\BottomPanel\BottomPanel.h" />

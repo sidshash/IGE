@@ -1,8 +1,6 @@
 ﻿#include "Application.h"
-
 void Application::OnStart()
 {
-    //gameObjects
 }
 
 void Application::OnUpdate()
@@ -32,7 +30,7 @@ void Application::onNotify(Event* e)
 Application::Application()
 {
     Locator::SetApplication(this);
-    windowHandler = new Window(600, 600, "IGE");
+    windowHandler = new Window(1920, 1080, "IGE");
     editor = new Editor();
     renderer = new Renderer(windowHandler->window);
     physics = new Physics();

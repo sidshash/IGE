@@ -24,7 +24,7 @@ int Window::Init() {
     glfwWindowHint(GLFW_OPENGL_PROFILE, GLFW_OPENGL_COMPAT_PROFILE);
     glfwWindowHint(GLFW_RESIZABLE, GLFW_TRUE);
 
-    window = glfwCreateWindow(800, 600, TITLE, nullptr, nullptr);
+    window = glfwCreateWindow(1920, 1080, TITLE, nullptr, nullptr);
     if (!window)
     {
         glfwTerminate();
