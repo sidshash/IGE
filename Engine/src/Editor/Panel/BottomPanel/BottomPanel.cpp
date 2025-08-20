@@ -8,7 +8,6 @@ void BottomPanel::DrawFolder(const char* name, GLuint id)
 
 	}
 	if (ImGui::IsItemHovered() && ImGui::IsMouseDoubleClicked(0)) {
-		std::cout << "Double Clicked" << std::endl;
 		FileSystem::PushPath(name);
 	}
 	ImVec2 p = ImGui::GetItemRectMin();

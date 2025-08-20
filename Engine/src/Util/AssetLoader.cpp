@@ -9,6 +9,5 @@ unsigned char* AssetLoader::LoadImage(const char* path, int& width, int& height,
         Logger::Log(LogLevel::Error, "Failed to Load Image");
         return nullptr;
     }
-    std::cout << "data: " << static_cast<void*>(data) << width << height << channels << std::endl;
     return data;
 }
