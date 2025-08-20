@@ -75,7 +75,7 @@ void ViewportPanel::OnDraw(){
     if (w > 2 && h > 2) {
         ImGui::SetCursorScreenPos(cursor); // optional—keeps image pinned
         ResizeFramebuffer((int)size.x, (int)size.y);
-        ImGui::Image((void*)(intptr_t)colorTexture, size, ImVec2(0, 1), ImVec2(1, 0));
+        ImGui::Image((ImTextureID)colorTexture, size, ImVec2(0, 1), ImVec2(1, 0));
     }
 }
 

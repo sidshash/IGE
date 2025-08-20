@@ -1,8 +1,8 @@
 #pragma once
-#include <IMGUI/imgui.h>
-#include <IMGUI/imgui_internal.h>
-#include <IMGUI/imgui_impl_glfw.h>
-#include <IMGUI/imgui_impl_opengl3.h>
+#include <imgui.h>
+#include <imgui_internal.h>
+#include <imgui_impl_glfw.h>
+#include <imgui_impl_opengl3.h>
 #include "../../EventSystem/Subject/Subject.h"
 class IPanel: public Subject
 {

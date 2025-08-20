@@ -5,7 +5,7 @@
 #include <cstdint>
 #include "../Component.h"
 #include "../../Renderer/Shader/Shader.h"
-#include <FileDialog/tinyfiledialogs.h>
+#include <tinyfiledialogs.h>
 #include <glm/glm.hpp>
 #include "../Transform/Transform.h"
 #include <glm/gtc/matrix_transform.hpp>

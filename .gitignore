@@ -371,3 +371,11 @@ logs.md
 #custom script / user generated
 /Engine/src/Assets/Scripts
 /Engine/src/Assets/Scenes
+
+# vcpkg build artifacts
+vcpkg_installed/
+vcpkg-configuration.json
+vcpkg-lock.json.user
+buildtrees/
+packages/
+downloads/

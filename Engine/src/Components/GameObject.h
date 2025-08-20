@@ -3,8 +3,8 @@
 #include <vector>
 #include "Component.h"
 #include <iostream>
-#include <IMGUI/imgui.h>
-#include <IMGUI/imgui_stdlib.h>
+#include <imgui.h>
+#include <imgui_stdlib.h>
 #include "../Util/Random.hpp"
 #include "Transform/Transform.h"
 #include "Mesh/Mesh.h"
